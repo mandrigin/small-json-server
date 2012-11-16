@@ -1,7 +1,6 @@
 import json
 import logging
 import os
-import sys
 
 import SimpleHTTPServer
 import SocketServer
@@ -97,13 +96,7 @@ def start_server(message, version, image_filepath):
 
 
 def check_dictionary(dict_, keys):
-    for key in keys:
-        if dict_.get(key, None) is None:
-            return False
-
-    return True
-
-
+    return reduce(lambda s, v : s and v, map(lambda k: dict_.get(k, None) is not None, keys), True)
 
 
 if __name__ == '__main__':
